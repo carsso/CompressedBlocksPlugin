@@ -2,7 +2,7 @@ package io.github.joffrey4.compressedblocks.event;
 
 import io.github.joffrey4.compressedblocks.Main;
 import io.github.joffrey4.compressedblocks.api.NMS;
-import io.github.joffrey4.compressedblocks.util.Enum;
+import io.github.joffrey4.compressedblocks.block.RegisterBlocks;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -37,7 +37,7 @@ public class EventOnBreak extends EventBase implements Listener {
             // Reset the block to AIR to avoid it to drop anything
             event.getBlock().setType(Material.AIR);
 
-            ItemStack dropStack = Enum.getByName((String) breakResult.getRight()).getRandUncompBlocks(5, 8);
+            ItemStack dropStack = RegisterBlocks.getUnCompressedBlocks((String) breakResult.getRight(), null);
             event.getBlock().getWorld().dropItemNaturally((Location) breakResult.getMiddle(), dropStack);
         }
     }

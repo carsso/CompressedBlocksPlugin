@@ -3,8 +3,7 @@ package io.github.joffrey4.compressedblocks.event;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.yggdrasil.ProfileNotFoundException;
 import io.github.joffrey4.compressedblocks.Main;
-import io.github.joffrey4.compressedblocks.util.Enum;
-import io.github.joffrey4.compressedblocks.util.EnumSwitch;
+import io.github.joffrey4.compressedblocks.block.RegisterBlocks;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -96,7 +95,7 @@ public class EventOnCraft extends EventBase implements Listener {
             return new ItemStack(Material.AIR);
         }
 
-        return Enum.getByName(profile.getProperties().get("compBlocksName").iterator().next().getValue()).getUncompBlocks(player);
+        return RegisterBlocks.getUnCompressedBlocks(profile.getProperties().get("compBlocksName").iterator().next().getValue(), player);
     }
 
     /**
@@ -115,7 +114,6 @@ public class EventOnCraft extends EventBase implements Listener {
             return new ItemStack(Material.AIR);
         }
 
-        Enum compBlock = Enum.getByName(profile.getProperties().get("compBlocksName").iterator().next().getValue());
-        return new EnumSwitch(compBlock).getCraftedCompressedBlocks(player);
+        return RegisterBlocks.getCompressedBlock(profile.getProperties().get("compBlocksName").iterator().next().getValue(), player);
     }
 }

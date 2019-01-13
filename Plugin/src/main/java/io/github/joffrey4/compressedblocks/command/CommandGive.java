@@ -1,7 +1,6 @@
 package io.github.joffrey4.compressedblocks.command;
 
-import io.github.joffrey4.compressedblocks.util.Enum;
-import io.github.joffrey4.compressedblocks.util.EnumSwitch;
+import io.github.joffrey4.compressedblocks.block.RegisterBlocks;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -28,7 +27,7 @@ public class CommandGive {
 
             // Check if the targeted player exists, and if the required block exists
             Player target = Bukkit.getServer().getPlayer(strings[1]);
-            if (target != null && Enum.getByName(strings[2]) != null) {
+            if (target != null && RegisterBlocks.getByName(strings[2]) != null) {
 
                 // Check the if the third parameter exists as positive int
                 int amount = 1;
@@ -44,8 +43,9 @@ public class CommandGive {
                 }
 
                 // Give the block and send notifications
-                Enum compBlock = Enum.getByName(strings[2]);
-                ItemStack item = new EnumSwitch(compBlock).getAmountCompressedBlock(amount);
+
+                ItemStack item = RegisterBlocks.getCompressedBlock(strings[2], null);
+                item.setAmount(amount);
                 target.getInventory().addItem(item);
 
                 // Send messages to sender and receiver

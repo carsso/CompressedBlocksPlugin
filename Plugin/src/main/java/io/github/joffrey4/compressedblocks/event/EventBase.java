@@ -29,7 +29,7 @@ public class EventBase {
         SkullMeta skullMeta;
 
         // Check if the itemStack is a Skull item of player
-        if (itemStack != null && itemStack.getType() == Material.SKULL_ITEM && itemStack.getDurability() == 3) {
+        if (itemStack != null && itemStack.getType() == Material.PLAYER_HEAD) {
 
             // Check if the skull has metadata and a displayName
             if (itemStack.hasItemMeta()) {

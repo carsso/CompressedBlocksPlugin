@@ -26,16 +26,8 @@
     <dependencies>
         <dependency>
             <groupId>io.github.joffrey4.compressedblocks</groupId>
-            <artifactId>CompressedBlocksPlugin-v1_11_R1</artifactId>
-            <version>v1_11_R1</version>
-            <type>jar</type>
-            <scope>compile</scope> <!-- The 'compile' scope will get shaded in -->
-            <optional>true</optional> <!-- Set all of these to optional, to ensure plugins building against yours don't look for them -->
-        </dependency>
-        <dependency>
-            <groupId>io.github.joffrey4.compressedblocks</groupId>
-            <artifactId>CompressedBlocksPlugin-v1_12_R1</artifactId>
-            <version>v1_12_R1</version>
+            <artifactId>CompressedBlocksPlugin-v1_13_R2</artifactId>
+            <version>v1_13_R2</version>
             <type>jar</type>
             <scope>compile</scope>
             <optional>true</optional>
@@ -51,7 +43,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
-            <version>1.12-R0.1-SNAPSHOT</version>
+            <version>1.13.2-R0.1-SNAPSHOT</version>
             <type>jar</type>
             <scope>provided</scope> <!-- The 'provided' scope will NOT get shaded in -->
             <optional>true</optional>

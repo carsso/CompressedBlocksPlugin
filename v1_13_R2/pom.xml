@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.joffrey4.compressedblocks</groupId>
-    <artifactId>CompressedBlocksPlugin-v1_12_R1</artifactId>
+    <artifactId>CompressedBlocksPlugin-v1_13_R2</artifactId>
     <packaging>jar</packaging>
-    <name>CompressedBlocksPlugin implementation v1_12_R1</name>
-    <version>v1_12_R1</version>
+    <name>CompressedBlocksPlugin implementation v1_13_R2</name>
+    <version>v1_13_R2</version>
 
     <parent>
         <groupId>io.github.joffrey4.compressedblocks</groupId>
@@ -20,7 +20,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
-            <version>1.12-R0.1-SNAPSHOT</version>
+            <version>1.13.2-R0.1-SNAPSHOT</version>
             <type>jar</type>
             <optional>true</optional>
         </dependency>

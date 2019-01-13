@@ -3,7 +3,6 @@ package io.github.joffrey4.compressedblocks.block;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import io.github.joffrey4.compressedblocks.Main;
-import io.github.joffrey4.compressedblocks.util.Enum;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -20,16 +19,14 @@ import java.util.UUID;
 public class BlockCompressed {
 
     private static Material material;
-    private static int metadata;
     private static String displayname;
     private static String name;
     private static String typeName;
     private static FileConfiguration config;
 
-    public BlockCompressed(Material material, int metadata, String typeName, Main plugin) {
+    public BlockCompressed(Material material, String typeName, Main plugin) {
         BlockCompressed.config = plugin.getConfig();
         BlockCompressed.material = material;
-        BlockCompressed.metadata = metadata;
 
         // Internal name of the compressed block (ex: oakwood)
         BlockCompressed.name = setName(typeName);
@@ -64,7 +61,7 @@ public class BlockCompressed {
     public ItemStack getItemStack() {
 
         // Get the skin image and initialize an itemStack (skull)
-        ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short)3);
+        ItemStack skull = new ItemStack(Material.PLAYER_HEAD, 1);
 
         String skinURL = "http://textures.minecraft.net/texture/";
         if (config.getString(name + ".texture").isEmpty()) {
@@ -75,7 +72,7 @@ public class BlockCompressed {
 
         // Get the skull metadata and initialize a texture profile
         SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
-        GameProfile profile = new GameProfile(UUID.fromString(Enum.getByName(name).getUUID()), null);
+        GameProfile profile = new GameProfile(UUID.fromString("069a79f4-44e9-4726-a5be-fca90e38aaf5"), null);
         profile.getProperties().put("textures", new Property("textures", Base64Coder.encodeString("{textures:{SKIN:{url:\"" + skinURL + "\"}}}")));
         profile.getProperties().put("compBlocksName", new Property("compBlocksName", name));
 
