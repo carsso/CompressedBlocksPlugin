@@ -44,7 +44,7 @@ compressible:
     lore: default
     texture: afb0375540965e555ceb156aa67b4e656a422c9dfe498e88f676ac1116fa8d
 
-  DARK_WOOD:
+  DARK_OAK_WOOD:
     name: default
     lore: default
     texture: 1b381cce56443bdf736cbd26c97919807fcf35548ad7f151db4d84218e6dc6b4
@@ -124,7 +124,7 @@ compressible:
     lore: default
     texture: 5d7a50f69638b5f9dbb18f2fb93e5ee5d922f9a3c5a50593bb64bba42bb31e
 
-  SOULSAND:
+  SOUL_SAND:
     name: default
     lore: default
     texture: 46fb3178630fc3a58e15944a8fc1cdcaf45965824d8b31ff66f88f024e64bc
