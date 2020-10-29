@@ -10,12 +10,11 @@ import io.github.joffrey4.compressedblocks.util.VersionChecker;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.craftbukkit.v1_16_R2.inventory.CraftShapedRecipe;
+import org.bukkit.craftbukkit.v1_16_R2.inventory.CraftShapelessRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Main extends JavaPlugin {
 
@@ -27,6 +26,8 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         saveDefaultConfig();
 
+        blocksConfig = new HashMap<>();
+
         // Check is a new version exists
         VersionChecker.init(this);
 
@@ -35,37 +36,39 @@ public class Main extends JavaPlugin {
         if (nmsHandler == null) {
             this.getLogger().info("Disabling CompressedBlocks");
             this.setEnabled(false);
-
-        } else {
-            ConfigurationSection compressibleConfig = config.getConfigurationSection("compressible");
-
-// This block was modified by @cindyker for The Minecats community, implimented by @AeSix
-// original cause for non-operation was invalid item names in the config. 
-            this.getLogger().info(compressibleConfig.toString());
-            for (Map.Entry<String, Object> entry : compressibleConfig.getValues(false).entrySet()) {
-                Material material = Material.valueOf(entry.getKey());
-// the next if-block will give a nice error message for any incorrect item names in the config
-                if(material == null){
-                       this.getLogger().info("Error in Config! Material: " + entry.getKey() + " is not a real material.");
-                       continue;  //Go to next item to check.  
-                }
-                Map<String, String> blockConfig = new HashMap<>();
-                blockConfig.put("name", config.getString("compressible." + entry.getKey() + ".name"));
-                blockConfig.put("lore", config.getString("compressible." + entry.getKey() + ".lore"));
-                blockConfig.put("texture", config.getString("compressible." + entry.getKey() + ".texture"));
-                blocksConfig.put(material, blockConfig);
-            }
-            // Initialize blocks & recipes
-            RegisterBlocks.init(this);
-            RegisterRecipes.init(this);
-
-            // Initialize plugin mechanics
-            RegisterEvent.init(this, nmsHandler);
-
-            // Initialize commands
-            RegisterCommand.init(this);
-
+            return;
         }
+
+        ConfigurationSection compressibleConfig = config.getConfigurationSection("compressible");
+
+        // This block was modified by @cindyker for The Minecats community, implemented by @AeSix
+        // original cause for non-operation was invalid item names in the config.
+        this.getLogger().info(compressibleConfig.toString());
+        for (Map.Entry<String, Object> entry : compressibleConfig.getValues(false).entrySet()) {
+            Material material;
+
+            try {
+                material = Material.valueOf(entry.getKey());
+            } catch (Exception e) {
+                this.getLogger().severe("Error in Config! Material: " + entry.getKey() + " is not a real material.");
+                continue;  //Go to next item to check.
+            }
+            Map<String, String> blockConfig = new HashMap<>();
+            blockConfig.put("name", config.getString("compressible." + entry.getKey() + ".name"));
+            blockConfig.put("lore", config.getString("compressible." + entry.getKey() + ".lore"));
+            blockConfig.put("texture", config.getString("compressible." + entry.getKey() + ".texture"));
+            blocksConfig.put(material, blockConfig);
+        }
+
+        // Initialize blocks & recipes
+        RegisterBlocks.init(this);
+        RegisterRecipes.init(this);
+
+        // Initialize plugin mechanics
+        RegisterEvent.init(this, nmsHandler);
+
+        // Initialize commands
+        RegisterCommand.init(this);
     }
 
 
