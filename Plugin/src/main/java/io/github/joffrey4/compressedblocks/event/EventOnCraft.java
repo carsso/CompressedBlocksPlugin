@@ -92,6 +92,7 @@ public class EventOnCraft extends EventBase implements Listener {
         try {
             profile = getProfile(skullMeta);
         } catch (ProfileNotFoundException e) {
+            e.printStackTrace();
             return new ItemStack(Material.AIR);
         }
 
@@ -111,6 +112,7 @@ public class EventOnCraft extends EventBase implements Listener {
         try {
             profile = getProfile(skullMeta);
         } catch (ProfileNotFoundException e) {
+            e.printStackTrace();
             return new ItemStack(Material.AIR);
         }
 
