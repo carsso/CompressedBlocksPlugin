@@ -21,9 +21,7 @@ public class RegisterBlocks {
 
         for (Map.Entry<Material, Map<String, String>> block : Main.blocksConfig.entrySet()) {
             Material material = block.getKey();
-            Map<String, String> blockConfig = block.getValue();
-            String name = blockConfig.get("name");
-            ItemStack compressedBlock = register(new BlockCompressed(material, name, plugin));
+            ItemStack compressedBlock = register(new BlockCompressed(material, plugin));
             registeredBlocks.put(material, compressedBlock);
         }
     }

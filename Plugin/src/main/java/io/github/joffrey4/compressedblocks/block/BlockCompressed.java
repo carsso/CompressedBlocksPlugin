@@ -19,43 +19,43 @@ import java.util.UUID;
 public class BlockCompressed {
 
     private static Material material;
-    private static String displayname;
-    private static String name;
+    private static String displayName;
+    private static String materialName;
     private static String typeName;
     private static FileConfiguration config;
 
-    public BlockCompressed(Material material, String typeName, Main plugin) {
+    public BlockCompressed(Material material, Main plugin) {
         BlockCompressed.config = plugin.getConfig();
         BlockCompressed.material = material;
 
-        // Internal name of the compressed block (ex: oakwood)
-        BlockCompressed.name = setName(typeName);
+        // Name of the type of the block (ex: Oak_Wood)
+        BlockCompressed.typeName = material.toString();
 
         // Name of the compressed block item (ex: Compressed Oak Wood)
-        BlockCompressed.displayname = setDisplayName(typeName);
+        BlockCompressed.displayName = setDisplayName();
 
-        // Name of the type of the block (ex: Oak Wood)
-        BlockCompressed.typeName = typeName;
+        // Name of the compressed block material
+        BlockCompressed.materialName = setMaterialName();
     }
 
-    private String setName(String name) {
-        return name.replaceAll("\\s+","").toLowerCase();
-    }
+    private String setDisplayName() {
+        String displayName = config.getString("compressible." + typeName + ".name");
 
-    private String setDisplayName(String typeName) {
-        String displayName;
-
-        if (Objects.equals(config.getString(name + ".name"), "default")) {
-            displayName = config.getString("default.name");
-        } else {
-            displayName = config.getString(name + ".name");
-        }
-
-        if (displayName.contains("&type")) {
-            displayName = displayName.replace("&type", typeName);
+        if(displayName == null || displayName.isEmpty()) {
+            displayName = typeName;
         }
 
         return ChatColor.translateAlternateColorCodes('&', displayName);
+    }
+
+    private String setMaterialName() {
+        String materialName = config.getString("compressible." + typeName + ".material-name");
+
+        if(materialName == null || materialName.isEmpty()) {
+            materialName = typeName;
+        }
+
+        return ChatColor.translateAlternateColorCodes('&', materialName);
     }
 
     public ItemStack getItemStack() {
@@ -64,17 +64,18 @@ public class BlockCompressed {
         ItemStack skull = new ItemStack(Material.PLAYER_HEAD, 1);
 
         String skinURL = "http://textures.minecraft.net/texture/";
-        if (config.getString(name + ".texture").isEmpty()) {
+        String texture = config.getString("compressible." + typeName + ".texture");
+        if (texture == null || texture.isEmpty()) {
             return skull;
         } else {
-            skinURL += config.getString(name + ".texture");
+            skinURL += config.getString("compressible." + typeName + ".texture");
         }
 
         // Get the skull metadata and initialize a texture profile
         SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
         GameProfile profile = new GameProfile(UUID.fromString("069a79f4-44e9-4726-a5be-fca90e38aaf5"), null);
         profile.getProperties().put("textures", new Property("textures", Base64Coder.encodeString("{textures:{SKIN:{url:\"" + skinURL + "\"}}}")));
-        profile.getProperties().put("compBlocksName", new Property("compBlocksName", name));
+        profile.getProperties().put("compBlocksName", new Property("compBlocksName", typeName));
 
         // Set the texture profile to the skull metadata
         Field profileField;
@@ -92,23 +93,23 @@ public class BlockCompressed {
     }
 
     public String getDisplayName() {
-        return displayname;
+        return displayName;
     }
 
     public List<String> getLore() {
         List<String> lore;
 
-        if (Objects.equals(config.getString(name + ".lore"), "default")) {
+        if (Objects.equals(config.getString("compressible." + typeName + ".lore"), "default")) {
             lore = config.getStringList("default.lore");
         } else {
-            lore = config.getStringList(name + ".lore");
+            lore = config.getStringList("compressible." + typeName + ".lore");
         }
 
         for (final ListIterator<String> i = lore.listIterator(); i.hasNext();) {
             String line = i.next();
 
             if (line.contains("&type")) {
-                line = line.replace("&type", typeName);
+                line = line.replace("&type", materialName);
             }
             i.set(ChatColor.translateAlternateColorCodes('&', line));
         }
