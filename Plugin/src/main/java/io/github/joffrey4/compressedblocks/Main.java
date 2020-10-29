@@ -18,13 +18,14 @@ import java.util.*;
 
 public class Main extends JavaPlugin {
 
-    private FileConfiguration config = getConfig();
+    private FileConfiguration config;
     private static NMS nmsHandler;
     public static Map<Material, Map<String, String>> blocksConfig;
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
+        config = getConfig();
 
         blocksConfig = new HashMap<>();
 
