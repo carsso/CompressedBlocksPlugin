@@ -44,6 +44,10 @@ public class EventBase {
                     return false;
                 }
 
+                if (profile == null) {
+                    return false;
+                }
+
                 return profile.getProperties().containsKey("compBlocksName");
             }
         }
