@@ -43,7 +43,11 @@ public class RegisterBlocks {
 
 
     public static ItemStack getByName(String name) {
-        return RegisterBlocks.registeredBlocks.get(Material.valueOf(name));
+        try {
+            return RegisterBlocks.registeredBlocks.get(Material.valueOf(name));
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public static ItemStack getCompressedBlock(String name, Player player) {
