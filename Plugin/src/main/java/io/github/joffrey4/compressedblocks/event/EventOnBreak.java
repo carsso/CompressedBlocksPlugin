@@ -15,12 +15,10 @@ import org.bukkit.inventory.ItemStack;
 
 public class EventOnBreak extends EventBase implements Listener {
 
-    private FileConfiguration config;
     private NMS nmsHandler;
 
     public EventOnBreak(Main plugin, NMS nmsHandler) {
         super(plugin);
-        this.config = plugin.getConfig();
         this.nmsHandler = nmsHandler;
     }
 
@@ -30,14 +28,13 @@ public class EventOnBreak extends EventBase implements Listener {
      */
     @EventHandler
     public void onBreak (BlockBreakEvent event) {
-
         ImmutableTriple breakResult = nmsHandler.eventOnBreak(event);
         if ((Boolean) breakResult.getLeft()) {
 
             // Reset the block to AIR to avoid it to drop anything
             event.getBlock().setType(Material.AIR);
 
-            ItemStack dropStack = RegisterBlocks.getUnCompressedBlocks((String) breakResult.getRight(), null);
+            ItemStack dropStack = RegisterBlocks.getUnCompressedBlocks((String) breakResult.getRight(), event.getPlayer());
             event.getBlock().getWorld().dropItemNaturally((Location) breakResult.getMiddle(), dropStack);
         }
     }
