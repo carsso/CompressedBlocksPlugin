@@ -82,12 +82,7 @@ fabric.properties
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-Supprimerait .gitignore
-Supprimerait CompressedBlocksPlugin.iml
-Supprimerait CompressedBlocksPlugin.ipr
-Supprimerait CompressedBlocksPlugin.iws
-Supprimerait out/
-Supprimerait api/
-!/lib/spigot-1.11.2-R0.1-SNAPSHOT.jar
+# Custom rules
+target/
+BuildTools/
+.idea/
