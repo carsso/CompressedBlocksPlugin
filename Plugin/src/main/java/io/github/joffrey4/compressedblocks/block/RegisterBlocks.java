@@ -15,6 +15,10 @@ public class RegisterBlocks {
     public static Map<Material, ItemStack> registeredBlocks;
 
     public static void init(Main plugin) {
+        if (registeredBlocks == null) {
+            registeredBlocks = new HashMap<>();
+        }
+
         for (Map.Entry<Material, Map<String, String>> block : Main.blocksConfig.entrySet()) {
             Material material = block.getKey();
             Map<String, String> blockConfig = block.getValue();
