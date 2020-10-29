@@ -15,14 +15,18 @@ import java.util.Map;
 public class RegisterRecipes {
 
     public static void init(Main plugin) {
-        NamespacedKey namespacedKey = new NamespacedKey(plugin, "receipes");
-
         Server server = Bukkit.getServer();
 
         for (Map.Entry<Material, ItemStack> registeredBlock : RegisterBlocks.registeredBlocks.entrySet()) {
             Material rawMaterial = registeredBlock.getKey();
+
+            NamespacedKey namespacedKey;
+
+            namespacedKey = new NamespacedKey(plugin, rawMaterial.name() + "-compressed");
             ItemStack compressedBlock = registeredBlock.getValue();
             server.addRecipe(Compressing(namespacedKey, compressedBlock, rawMaterial));
+
+            namespacedKey = new NamespacedKey(plugin, rawMaterial.name() + "-uncompressed");
             server.addRecipe(UnCompressing(namespacedKey, new ItemStack(rawMaterial), compressedBlock.getType()));
         }
     }

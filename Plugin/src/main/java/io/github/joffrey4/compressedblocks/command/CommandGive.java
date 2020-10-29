@@ -27,38 +27,50 @@ public class CommandGive {
 
             // Check if the targeted player exists, and if the required block exists
             Player target = Bukkit.getServer().getPlayer(strings[1]);
-            if (target != null && RegisterBlocks.getByName(strings[2]) != null) {
 
-                // Check the if the third parameter exists as positive int
-                int amount = 1;
-                if (strings.length == 4) {
-                    try {
-                        amount = Integer.parseInt(strings[3]);
-                        if (amount <= 0) {
-                            amount = 1;
-                        } else if (amount > 2304) {
-                            amount = 2304;
-                        }
-                    } catch (NumberFormatException ignored) {}
-                }
-
-                // Give the block and send notifications
-
-                ItemStack item = RegisterBlocks.getCompressedBlock(strings[2], null);
-                item.setAmount(amount);
-                target.getInventory().addItem(item);
-
-                // Send messages to sender and receiver
-                String message = ChatColor.translateAlternateColorCodes('&', "%s " + amount + "x" + item.getItemMeta().getDisplayName() + "&r %s &7&o" + target.getDisplayName());
-                if (commandSender instanceof Player && commandSender == target) {
-                    target.sendMessage(String.format(message, "Receive", "from"));
-                } else {
-                    commandSender.sendMessage(String.format(message, "Give", "to"));
-                    target.sendMessage(String.format(message, "Receive", "from"));
-                }
-                return true;
+            if(target == null) {
+                String message = ChatColor.translateAlternateColorCodes('&', "&4Invalid Target Specified");
+                commandSender.sendMessage(message);
+                return false;
             }
-            commandSender.sendMessage("Invalid player or block name.");
+
+            String cleanedMaterialName = strings[2].toUpperCase();
+            ItemStack stack = RegisterBlocks.getByName(cleanedMaterialName);
+
+            if(stack == null) {
+                String message = ChatColor.translateAlternateColorCodes('&', "&4Invalid Material");
+                commandSender.sendMessage(message);
+                return false;
+            }
+
+            // Check the if the third parameter exists as positive int
+            int amount = 1;
+            if (strings.length == 4) {
+                try {
+                    amount = Integer.parseInt(strings[3]);
+                    if (amount <= 0) {
+                        amount = 1;
+                    } else if (amount > 2304) {
+                        amount = 2304;
+                    }
+                } catch (NumberFormatException ignored) {}
+            }
+
+            // Give the block and send notifications
+
+            ItemStack item = RegisterBlocks.getCompressedBlock(cleanedMaterialName, target);
+            item.setAmount(amount);
+            target.getInventory().addItem(item);
+
+            // Send messages to sender and receiver
+            String message = ChatColor.translateAlternateColorCodes('&', "%s " + amount + "x" + item.getItemMeta().getDisplayName() + "&r %s &7&o" + target.getDisplayName());
+            if (commandSender instanceof Player && commandSender == target) {
+                target.sendMessage(String.format(message, "Receive", "from"));
+            } else {
+                commandSender.sendMessage(String.format(message, "Give", "to"));
+                target.sendMessage(String.format(message, "Receive", "from"));
+            }
+            return true;
         }
         commandSender.sendMessage("Missing parameters:");
         return false;

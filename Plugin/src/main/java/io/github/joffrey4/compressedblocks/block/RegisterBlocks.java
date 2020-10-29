@@ -15,11 +15,13 @@ public class RegisterBlocks {
     public static Map<Material, ItemStack> registeredBlocks;
 
     public static void init(Main plugin) {
+        if (registeredBlocks == null) {
+            registeredBlocks = new HashMap<>();
+        }
+
         for (Map.Entry<Material, Map<String, String>> block : Main.blocksConfig.entrySet()) {
             Material material = block.getKey();
-            Map<String, String> blockConfig = block.getValue();
-            String name = blockConfig.get("name");
-            ItemStack compressedBlock = register(new BlockCompressed(material, name, plugin));
+            ItemStack compressedBlock = register(new BlockCompressed(material, plugin));
             registeredBlocks.put(material, compressedBlock);
         }
     }
@@ -39,7 +41,11 @@ public class RegisterBlocks {
 
 
     public static ItemStack getByName(String name) {
-        return RegisterBlocks.registeredBlocks.get(Material.valueOf(name));
+        try {
+            return RegisterBlocks.registeredBlocks.get(Material.valueOf(name));
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public static ItemStack getCompressedBlock(String name, Player player) {
