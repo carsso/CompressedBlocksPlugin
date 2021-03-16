@@ -10,8 +10,6 @@ import io.github.joffrey4.compressedblocks.util.VersionChecker;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.craftbukkit.v1_16_R2.inventory.CraftShapedRecipe;
-import org.bukkit.craftbukkit.v1_16_R2.inventory.CraftShapelessRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.*;
