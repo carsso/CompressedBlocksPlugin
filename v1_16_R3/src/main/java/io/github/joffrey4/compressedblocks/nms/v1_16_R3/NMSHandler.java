@@ -1,4 +1,4 @@
-package io.github.joffrey4.compressedblocks.nms.v1_16_R2;
+package io.github.joffrey4.compressedblocks.nms.v1_16_R3;
 
 import com.mojang.authlib.GameProfile;
 import io.github.joffrey4.compressedblocks.api.NMS;
@@ -6,9 +6,9 @@ import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockState;
-import org.bukkit.craftbukkit.v1_16_R2.block.CraftBlockEntityState;
-import org.bukkit.craftbukkit.v1_16_R2.block.CraftSkull;
-import net.minecraft.server.v1_16_R2.TileEntity;
+import org.bukkit.craftbukkit.v1_16_R3.block.CraftBlockEntityState;
+import org.bukkit.craftbukkit.v1_16_R3.block.CraftSkull;
+import net.minecraft.server.v1_16_R3.TileEntity;
 import org.bukkit.event.block.BlockBreakEvent;
 
 import java.lang.reflect.Field;
