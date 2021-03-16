@@ -1,12 +1,12 @@
-# Compressed Blocks Plugin [![Build Status](https://travis-ci.org/Joffrey4/CompressedBlocksPlugin.svg?branch=master)](https://travis-ci.org/Joffrey4/CompressedBlocksPlugin)
+# Compressed Blocks Plugin [![Build Status](https://travis-ci.com/carsso/CompressedBlocksPlugin.svg?branch=master)](https://travis-ci.com/carsso/CompressedBlocksPlugin)
 
-A **Bukkit** / **Spigot** plugin that allow players to compress & uncompress blocks - 1.11 to 1.12
+A **Bukkit** / **Spigot** plugin that allow players to compress & uncompress blocks - 1.11 to 1.16
 
-Doc and download: https://cbp.jbvn.me
+Fork of https://github.com/Joffreybvn/CompressedBlocksPlugin
 
-Bukkit page: https://dev.bukkit.org/projects/compressed-blocks-plugin
+Original Bukkit page: https://dev.bukkit.org/projects/compressed-blocks-plugin
 
-Spigot page: https://www.spigotmc.org/resources/compressed-blocks-plugin.41308/
+Original Spigot page: https://www.spigotmc.org/resources/compressed-blocks-plugin.41308/
 
 ## Building Required Server Jars
 
