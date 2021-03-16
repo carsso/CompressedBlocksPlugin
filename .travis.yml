@@ -5,11 +5,11 @@ install:
   - java -jar BuildTools.jar --rev 1.13.2
   - java -jar BuildTools.jar --rev 1.16.3
   - java -jar BuildTools.jar --rev 1.16.5
-script: 
   - mvn -B install:install-file -Dfile=spigot-1.13.2.jar -DgroupId=org.spigotmc -DartifactId=spigot -Dversion=1.13.2-R0.1-SNAPSHOT -Dpackaging=jar
   - mvn -B install:install-file -Dfile=spigot-1.16.3.jar -DgroupId=org.spigotmc -DartifactId=spigot -Dversion=1.16.3-R0.1-SNAPSHOT -Dpackaging=jar
   - mvn -B install:install-file -Dfile=spigot-1.16.5.jar -DgroupId=org.spigotmc -DartifactId=spigot -Dversion=1.16.5-R0.1-SNAPSHOT -Dpackaging=jar
-
+script: 
+  - mvn -B CompressedBlocksPlugin
 deploy:
   provider: releases
   api_key: '$GITHUB_API_KEY'
